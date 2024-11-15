@@ -1,0 +1,29 @@
+PODS:
+  - FlutterMacOS (1.0.0)
+  - jxl_coder (0.0.1):
+    - FlutterMacOS
+    - JxlCoder
+  - JxlCoder (1.7.3)
+
+DEPENDENCIES:
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - jxl_coder (from `Flutter/ephemeral/.symlinks/plugins/jxl_coder/macos`)
+
+SPEC REPOS:
+  trunk:
+    - JxlCoder
+
+EXTERNAL SOURCES:
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  jxl_coder:
+    :path: Flutter/ephemeral/.symlinks/plugins/jxl_coder/macos
+
+SPEC CHECKSUMS:
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  jxl_coder: e558bedf497ecaa44f703dfb0388c711dabc2072
+  JxlCoder: e6a5ff4e5b24c1e4695265d2db6c6456e5784622
+
+PODFILE CHECKSUM: f0c21717cb7ee9112f915044c74bfceb5b12e02a
+
+COCOAPODS: 1.15.2
