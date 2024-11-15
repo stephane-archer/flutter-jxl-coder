@@ -12,6 +12,7 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:jxl_coder/jxl_coder.dart';
+import 'package:collection/collection.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,10 @@ void main() {
     final String? version = await plugin.getPlatformVersion();
     // The version string depends on the host platform running the test, so
     // just assert that some non-empty string is returned.
+    expect(version, isNotNull);
+    if (version != null) {
+      return;
+    }
     expect(version?.isNotEmpty, true);
   });
 
@@ -28,23 +33,43 @@ void main() {
     File file = File("integration_test/1.jxl");
     Uint8List jxlData = await file.readAsBytes();
     final Uint8List? jpegData = await JxlCoder.jxlToJpeg(jxlData);
-    expect(jpegData?.isNotEmpty, true);
+    expect(jpegData, isNotNull);
     if (jpegData == null) {
       return;
     }
-    File output = File("integration_test/1.out.jpg");
-    output.writeAsBytesSync(jpegData);
+    expect(jpegData.isNotEmpty, true);
+    // File output = File("integration_test/1.out.jpg");
+    // output.writeAsBytesSync(jpegData);
   });
 
   testWidgets('jpegToJxl test', (WidgetTester tester) async {
     File file = File("integration_test/2.jpg");
     Uint8List jpegData = await file.readAsBytes();
     final Uint8List? jxlData = await JxlCoder.jpegToJxl(jpegData);
-    expect(jxlData?.isNotEmpty, true);
+    expect(jxlData, isNotNull);
     if (jxlData == null) {
       return;
     }
-    File output = File("integration_test/1.out.jxl");
-    output.writeAsBytesSync(jxlData);
+    expect(jxlData.isNotEmpty, true);
+    // File output = File("integration_test/1.out.jxl");
+    // output.writeAsBytesSync(jxlData);
+  });
+
+  testWidgets('jpegToJxlToJpeg test', (WidgetTester tester) async {
+    File file = File("integration_test/2.jpg");
+    Uint8List jpegData = await file.readAsBytes();
+    final Uint8List? jxlData = await JxlCoder.jpegToJxl(jpegData);
+    expect(jxlData, isNotNull);
+    if (jxlData == null) {
+      return;
+    }
+    expect(jxlData.isNotEmpty, true);
+    final Uint8List? jpegDataReturn = await JxlCoder.jxlToJpeg(jxlData);
+    expect(jpegDataReturn, isNotNull);
+    if (jpegDataReturn == null) {
+      return;
+    }
+    expect(jpegDataReturn.isNotEmpty, true);
+    expect(const ListEquality().equals(jpegData, jpegDataReturn), isTrue);
   });
 }

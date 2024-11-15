@@ -9,31 +9,19 @@ class JxlCoder {
     return JxlCoderPlatform.instance.getPlatformVersion();
   }
 
-  /// Converts JXL data to JPEG.
-  static Future<Uint8List?> jxlToJpeg(Uint8List jxlData) async {
-    try {
-      final result =
-          await _channel.invokeMethod<Uint8List>('jxlToJpeg', {
-        'jxlData': jxlData,
-      });
-      return result;
-    } catch (e) {
-      print("Error in inverseJXLToJPEG: $e");
-      return null;
-    }
-  }
-
   /// Converts JPEG data to JXL.
   static Future<Uint8List?> jpegToJxl(Uint8List jpegData) async {
-    try {
-      final result =
-          await _channel.invokeMethod<Uint8List>('jpegToJxl', {
-        'jpegData': jpegData,
-      });
-      return result;
-    } catch (e) {
-      print("Error in transcodeJPEGToJXL: $e");
-      return null;
-    }
+    final result = await _channel.invokeMethod<Uint8List>('jpegToJxl', {
+      'jpegData': jpegData,
+    });
+    return result;
+  }
+
+  /// Converts JXL data to JPEG.
+  static Future<Uint8List?> jxlToJpeg(Uint8List jxlData) async {
+    final result = await _channel.invokeMethod<Uint8List>('jxlToJpeg', {
+      'jxlData': jxlData,
+    });
+    return result;
   }
 }
