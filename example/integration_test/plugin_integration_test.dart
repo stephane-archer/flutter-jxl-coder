@@ -11,7 +11,6 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
 import 'package:jxl_coder/jxl_coder.dart';
 
 void main() {
@@ -25,12 +24,27 @@ void main() {
     expect(version?.isNotEmpty, true);
   });
 
-  testWidgets('inverseJXLToJPEG test', (WidgetTester tester) async {
+  testWidgets('jxlToJpeg test', (WidgetTester tester) async {
     File file = File("integration_test/1.jxl");
     Uint8List jxlData = await file.readAsBytes();
-    final Uint8List? jpegData = await JxlCoder.inverseJXLToJPEG(jxlData);
+    final Uint8List? jpegData = await JxlCoder.jxlToJpeg(jxlData);
     expect(jpegData?.isNotEmpty, true);
+    if (jpegData == null) {
+      return;
+    }
     File output = File("integration_test/1.out.jpg");
+    output.writeAsBytesSync(jpegData);
+  });
+
+  testWidgets('jpegToJxl test', (WidgetTester tester) async {
+    File file = File("integration_test/2.jpg");
+    Uint8List jpegData = await file.readAsBytes();
+    final Uint8List? jxlData = await JxlCoder.jpegToJxl(jpegData);
+    expect(jxlData?.isNotEmpty, true);
+    if (jxlData == null) {
+      return;
+    }
+    File output = File("integration_test/1.out.jxl");
     output.writeAsBytesSync(jxlData);
   });
 }

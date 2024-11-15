@@ -11,7 +11,7 @@ public class JxlCoderPlugin: NSObject, FlutterPlugin {
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
-        case "transcodeJPEGToJXL":
+        case "jpegToJxl":
             if let args = call.arguments as? [String: Any],
                let jpegData = args["jpegData"] as? FlutterStandardTypedData {
                 do {
@@ -23,7 +23,7 @@ public class JxlCoderPlugin: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError(code: "INVALID_ARGUMENTS", message: "jpegData is required", details: nil))
             }
-        case "inverseJXLToJPEG":
+        case "jxlToJpeg":
             if let args = call.arguments as? [String: Any],
                let jxlData = args["jxlData"] as? FlutterStandardTypedData {
                 do {

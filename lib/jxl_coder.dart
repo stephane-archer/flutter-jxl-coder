@@ -10,10 +10,10 @@ class JxlCoder {
   }
 
   /// Converts JXL data to JPEG.
-  static Future<Uint8List?> inverseJXLToJPEG(Uint8List jxlData) async {
+  static Future<Uint8List?> jxlToJpeg(Uint8List jxlData) async {
     try {
       final result =
-          await _channel.invokeMethod<Uint8List>('inverseJXLToJPEG', {
+          await _channel.invokeMethod<Uint8List>('jxlToJpeg', {
         'jxlData': jxlData,
       });
       return result;
@@ -24,10 +24,10 @@ class JxlCoder {
   }
 
   /// Converts JPEG data to JXL.
-  static Future<Uint8List?> transcodeJPEGToJXL(Uint8List jpegData) async {
+  static Future<Uint8List?> jpegToJxl(Uint8List jpegData) async {
     try {
       final result =
-          await _channel.invokeMethod<Uint8List>('transcodeJPEGToJXL', {
+          await _channel.invokeMethod<Uint8List>('jpegToJxl', {
         'jpegData': jpegData,
       });
       return result;
