@@ -35,6 +35,36 @@ public class JxlCoderPlugin: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError(code: "INVALID_ARGUMENTS", message: "jxlData is required", details: nil))
             }
+        case "saveJpegAsJxl":
+            if let args = call.arguments as? [String: Any],
+               let inputPath = args["inputPath"] as? String,
+               let outputPath = args["outputPath"] as? String {
+                do {
+                    let jpegData = try Data(contentsOf: URL(fileURLWithPath: inputPath))
+                    let jxlData = try JXLCoder.transcode(jpegData: jpegData)
+                    try jxlData.write(to: URL(fileURLWithPath: outputPath))
+                    result(nil) // Success
+                } catch {
+                    result(FlutterError(code: "TRANSCODE_ERROR", message: "Failed to transcode JPEG to JXL", details: error.localizedDescription))
+                }
+            } else {
+                result(FlutterError(code: "INVALID_ARGUMENTS", message: "inputPath and outputPath are required", details: nil))
+            }
+        case "saveJxlAsJpeg":
+            if let args = call.arguments as? [String: Any],
+               let inputPath = args["inputPath"] as? String,
+               let outputPath = args["outputPath"] as? String {
+                do {
+                    let jxlData = try Data(contentsOf: URL(fileURLWithPath: inputPath))
+                    let jpegData = try JXLCoder.inverse(jxlData: jxlData)
+                    try jpegData.write(to: URL(fileURLWithPath: outputPath))
+                    result(nil) // Success
+                } catch {
+                    result(FlutterError(code: "INVERSE_ERROR", message: "Failed to convert JXL to JPEG", details: error.localizedDescription))
+                }
+            } else {
+                result(FlutterError(code: "INVALID_ARGUMENTS", message: "inputPath and outputPath are required", details: nil))
+            }
         case "getPlatformVersion":
             result("macOS " + ProcessInfo.processInfo.operatingSystemVersionString)
         default:

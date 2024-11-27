@@ -24,4 +24,20 @@ class JxlCoder {
     });
     return result;
   }
+
+  /// Converts a JPEG file to JXL and saves it to the specified output path.
+  static Future<void> saveJpegAsJxl(String inputPath, String outputPath) async {
+    await _channel.invokeMethod('saveJpegAsJxl', {
+      'inputPath': inputPath,
+      'outputPath': outputPath,
+    });
+  }
+
+  /// Converts a JXL file to JPEG and saves it to the specified output path.
+  static Future<void> saveJxlAsJpeg(String inputPath, String outputPath) async {
+    await _channel.invokeMethod('saveJxlAsJpeg', {
+      'inputPath': inputPath,
+      'outputPath': outputPath,
+    });
+  }
 }

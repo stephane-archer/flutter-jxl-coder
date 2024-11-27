@@ -9,10 +9,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:jxl_coder/jxl_coder.dart';
-import 'package:collection/collection.dart';
+import 'package:path/path.dart' as path_lib;
+import 'package:path_provider/path_provider.dart';
+import 'package:random_string/random_string.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -70,6 +73,44 @@ void main() {
       return;
     }
     expect(jpegDataReturn.isNotEmpty, true);
+    expect(const ListEquality().equals(jpegData, jpegDataReturn), isTrue);
+  });
+  testWidgets('saveJpegAsJxl test', (WidgetTester tester) async {
+    File inputFile = File("integration_test/2.jpg");
+    expect(inputFile.existsSync(), true);
+    var tmpDir = (await getTemporaryDirectory()).createTempSync(randomAlpha(5));
+    File outputFile = File(path_lib.join(tmpDir.path, "out.jxl"));
+    expect(outputFile.existsSync(), false);
+    await JxlCoder.saveJpegAsJxl(inputFile.path, outputFile.path);
+    expect(inputFile.existsSync(), true);
+    expect(outputFile.existsSync(), true);
+  });
+  testWidgets('saveJxlAsJpeg test', (WidgetTester tester) async {
+    File inputFile = File("integration_test/1.jxl");
+    expect(inputFile.existsSync(), true);
+    var tmpDir = (await getTemporaryDirectory()).createTempSync(randomAlpha(5));
+    File outputFile = File(path_lib.join(tmpDir.path, "out.jpg"));
+    expect(outputFile.existsSync(), false);
+    await JxlCoder.saveJxlAsJpeg(inputFile.path, outputFile.path);
+    expect(inputFile.existsSync(), true);
+    expect(outputFile.existsSync(), true);
+  });
+  testWidgets('saveJpegAsJxlAsJpeg test', (WidgetTester tester) async {
+    File jpegFile = File("integration_test/2.jpg");
+    expect(jpegFile.existsSync(), true);
+    var tmpDir = (await getTemporaryDirectory()).createTempSync(randomAlpha(5));
+    File jxlFile = File(path_lib.join(tmpDir.path, "out.jxl"));
+    expect(jxlFile.existsSync(), false);
+    await JxlCoder.saveJpegAsJxl(jpegFile.path, jxlFile.path);
+    expect(jpegFile.existsSync(), true);
+    expect(jxlFile.existsSync(), true);
+    File outputFile =
+        File(path_lib.join(tmpDir.path, "out.jpg"));
+    await JxlCoder.saveJxlAsJpeg(jxlFile.path, outputFile.path);
+    expect(jxlFile.existsSync(), true);
+    expect(outputFile.existsSync(), true);
+    var jpegData = jpegFile.readAsBytesSync();
+    var jpegDataReturn = outputFile.readAsBytesSync();
     expect(const ListEquality().equals(jpegData, jpegDataReturn), isTrue);
   });
 }
