@@ -5,7 +5,7 @@
 Pod::Spec.new do |s|
   s.name             = 'jxl_coder'
   s.version          = '0.1.1'
-  s.summary          = 'A Flutter plugin for the JxlCoder library on macOS.'
+  s.summary          = 'A Flutter plugin for the JxlCoder library on iOS.'
   s.description      = <<-DESC
 A plugin that provides JPEG XL (JXL) encoding and decoding using JxlCoder (libjxl).
                        DESC
@@ -15,10 +15,10 @@ A plugin that provides JPEG XL (JXL) encoding and decoding using JxlCoder (libjx
 
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
-  s.dependency 'FlutterMacOS'
+  s.dependency 'Flutter'
   s.dependency 'JxlCoder'
 
-  s.platform = :osx, '12.0'
+  s.platform = :ios, '13.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'
 end
