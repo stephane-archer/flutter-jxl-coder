@@ -1,0 +1,34 @@
+name: Apple platform validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Check Dart API
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+
+      - name: Build macOS example
+        working-directory: example
+        run: flutter build macos --debug
+
+      - name: Build unsigned iOS example
+        working-directory: example
+        run: flutter build ios --debug --no-codesign
+
+      - name: Build iOS simulator example
+        working-directory: example
+        run: flutter build ios --debug --simulator --no-codesign

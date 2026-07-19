@@ -1,0 +1,13 @@
+# Local Dart and Flutter outputs. A .pubignore replaces .gitignore for pub.
+/.dart_tool/
+/build/
+/coverage/
+/pubspec.lock
+*.log
+.DS_Store
+
+# Development-only coverage remains in the repository and CI, not the runtime
+# package consumed by applications.
+/native/tests/
+/test/
+/example/integration_test/performance_test.dart

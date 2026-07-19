@@ -1,0 +1,4 @@
+module JxlCoderNative {
+  umbrella header "JxlCoderNative.h"
+  export *
+}

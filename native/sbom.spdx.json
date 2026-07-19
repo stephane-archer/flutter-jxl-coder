@@ -1,0 +1,72 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "jxl-coder-1.0.0-native",
+  "documentNamespace": "https://github.com/stephanearcher/jxl_coder/sbom/1.0.0",
+  "creationInfo": {
+    "created": "2026-07-21T00:00:00Z",
+    "creators": ["Tool: Codex native dependency inventory"]
+  },
+  "packages": [
+    {
+      "name": "jxl_coder",
+      "SPDXID": "SPDXRef-Package-jxl-coder",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "libjxl",
+      "SPDXID": "SPDXRef-Package-libjxl",
+      "versionInfo": "0.12.0",
+      "downloadLocation": "https://github.com/libjxl/libjxl/releases/tag/v0.12.0",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION",
+      "comment": "The package uses libjxl's parallel-runner interface with its own shared scheduler; upstream libjxl_threads runner objects are excluded.",
+      "checksums": [{"algorithm": "SHA256", "checksumValue": "03e9be69a30be4011f559da75328b6d7cea8ad921fabfbd551ce10bf45cdc992"}]
+    },
+    {
+      "name": "Highway",
+      "SPDXID": "SPDXRef-Package-highway",
+      "versionInfo": "1.2.0",
+      "downloadLocation": "git+https://github.com/google/highway.git@457c891775a7397bdb0376bb1031e6e027af1c48",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "Brotli",
+      "SPDXID": "SPDXRef-Package-brotli",
+      "versionInfo": "1.2.0",
+      "downloadLocation": "git+https://github.com/google/brotli.git@028fb5a23661f123017c060daa546b55cf4bde29",
+      "filesAnalyzed": false,
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "skcms",
+      "SPDXID": "SPDXRef-Package-skcms",
+      "versionInfo": "96d9171c94b937a1b5f0293de7309ac16311b722",
+      "downloadLocation": "git+https://skia.googlesource.com/skcms.git@96d9171c94b937a1b5f0293de7309ac16311b722",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-3-Clause",
+      "licenseDeclared": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION"
+    }
+  ],
+  "relationships": [
+    {"spdxElementId": "SPDXRef-DOCUMENT", "relationshipType": "DESCRIBES", "relatedSpdxElement": "SPDXRef-Package-jxl-coder"},
+    {"spdxElementId": "SPDXRef-Package-jxl-coder", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-Package-libjxl"},
+    {"spdxElementId": "SPDXRef-Package-libjxl", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-Package-highway"},
+    {"spdxElementId": "SPDXRef-Package-libjxl", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-Package-brotli"},
+    {"spdxElementId": "SPDXRef-Package-libjxl", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-Package-skcms"}
+  ]
+}

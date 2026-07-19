@@ -1,8 +1,6 @@
-## 0.1.1
+## 1.0.0
 
-* Document architecture: CocoaPods `JxlCoder` → libjxl (CPU/SIMD), not GPU.
-* Add iOS plugin registration mirroring the macOS method-channel API.
-* Clarify platform support matrix and Windows/Linux/Android roadmap.
+large rewrite and cleanned API
 
 ## 0.1.0
 

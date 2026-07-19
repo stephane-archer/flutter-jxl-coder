@@ -1,0 +1,14 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      # Release tags are the exact package version, for example: 1.0.0.
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish:
+    permissions:
+      # Required by pub.dev to authenticate with GitHub's short-lived OIDC token.
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1

@@ -1,6 +1,6 @@
 name: jxl_coder
-description: "JpegXL encoding and decoding for Flutter (Apple platforms via libjxl)"
-version: 0.1.1
+description: "JPEG-to-JPEG XL compression for Flutter, with byte-exact original JPEG and metadata recovery"
+version: 1.0.0
 repository: "https://github.com/stephane-archer/flutter-jxl-coder"
 
 environment:
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +23,5 @@ flutter:
         pluginClass: JxlCoderPlugin
       ios:
         pluginClass: JxlCoderPlugin
+      windows:
+        pluginClass: JxlCoderPluginCApi

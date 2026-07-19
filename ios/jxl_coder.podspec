@@ -4,21 +4,25 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'jxl_coder'
-  s.version          = '0.1.1'
-  s.summary          = 'A Flutter plugin for the JxlCoder library on iOS.'
+  s.version          = '1.0.0'
+  s.summary          = 'JPEG-to-JPEG XL compression with byte-exact JPEG and metadata recovery on iOS.'
   s.description      = <<-DESC
-A plugin that provides JPEG XL (JXL) encoding and decoding using JxlCoder (libjxl).
+A Flutter plugin for JPEG-to-JPEG XL compression, then converting JPEG XL back to the exact original JPEG bytes, including metadata, with statically linked libjxl.
                        DESC
   s.homepage         = 'https://github.com/stephane-archer/flutter-jxl-coder'
-  s.license          = { :file => '../LICENSE' }
+  s.license          = { :type => 'BSD-3-Clause', :file => '../LICENSE' }
   s.author           = { 'Stephane Archer' => 'archerstephane@gmail.com' }
 
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'jxl_coder/Sources/**/*.{swift,h,mm}'
+  s.public_header_files = 'jxl_coder/Sources/JxlCoderCore/include/**/*.h'
+  s.vendored_frameworks = 'jxl_coder/Frameworks/JxlCoderNative.xcframework'
   s.dependency 'Flutter'
-  s.dependency 'JxlCoder'
 
   s.platform = :ios, '13.0'
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  s.pod_target_xcconfig = {
+    'DEFINES_MODULE' => 'YES',
+    'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
+  }
   s.swift_version = '5.0'
 end

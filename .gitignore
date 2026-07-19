@@ -5,10 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
+.swiftpm/
 .svn/
-migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -27,3 +28,4 @@ migrate_working_dir/
 **/doc/api/
 .dart_tool/
 build/
+/coverage/
