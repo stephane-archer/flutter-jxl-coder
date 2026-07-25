@@ -9,26 +9,29 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+        with:
+          path: jxl_coder
 
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
 
       - name: Check Dart API
+        working-directory: jxl_coder
         run: |
           flutter pub get
           flutter analyze
           flutter test
 
       - name: Build macOS example
-        working-directory: example
+        working-directory: jxl_coder/example
         run: flutter build macos --debug
 
       - name: Build unsigned iOS example
-        working-directory: example
+        working-directory: jxl_coder/example
         run: flutter build ios --debug --no-codesign
 
       - name: Build iOS simulator example
-        working-directory: example
+        working-directory: jxl_coder/example
         run: flutter build ios --debug --simulator --no-codesign
